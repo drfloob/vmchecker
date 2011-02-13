@@ -1,9 +1,7 @@
-import urllib2, urllib, re, cookielib, sqlite3
+import urllib2, urllib, re, cookielib
 import android
 
-sql= sqlite3.connect("data.db")
 droid = android.Android()
-
 
 
 def login(u,p):
@@ -52,30 +50,13 @@ def alert_mins((u,v)):
 
 
 
-def ask_user_info():
-    phone= android.getLine1Number()
-    if phone == null:
-        phone= android.dialogGetInput('Phone Number')
-    pin= android.dialogGetPassword('Pin')
-    return (phone, pin)
-
-
-def store_user_info(data):
-    sql.execute('create table if not exists data (phone varchar(10), pin varchar(6));')
-    sql.execute('delete from data where 1=1;')
-    sql.execute('insert into data(?,?)', data)
-    sql.commit()
-
-
 def get_user_info():
-    res= sql.execute('select * from data limit 1', data)
-    if res.rowcount == 0:
-        ui= ask_user_info()
-        store_user_info(ui)
-        return ui
-    return res[0]
-
-
+    phone= droid.getLine1Number().result
+    print phone
+    if phone == None:
+        phone= droid.dialogGetInput('Phone Number').result
+    pin= droid.dialogGetPassword('Pin').result
+    return (phone, pin)
 
 
 if __name__ == "__main__":
