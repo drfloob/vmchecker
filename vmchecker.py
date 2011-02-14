@@ -52,7 +52,7 @@ def alert_mins((u,v)):
 
 def get_user_info():
     phone= droid.getLine1Number().result
-    print phone
+#    print phone
     if phone == None:
         phone= droid.dialogGetInput('Phone Number').result
     pin= droid.dialogGetPassword('Pin').result
@@ -61,7 +61,7 @@ def get_user_info():
 
 if __name__ == "__main__":
     u,p= get_user_info()
-    print u,p
+#    print u,p
     s= login(u,p)
     data= get_min(s)
     alert_mins(data)
